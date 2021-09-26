@@ -1,0 +1,200 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2 class = 'headline-center'>{% block title %} My money start ! {% endblock %}</h2> <!-- works both as a title for the page and a heading that appears below the navigation bar inherited from the base template. -->
+
+    <div>
+        <div>
+            <h4 class='expense-header'>Add Expense</h4>
+            <div id="expense-new"> <!--class="collapse"-->
+                
+                <div class='container red-color'>
+                    <div class='row'>  
+                        <div class='col-lg-6'>
+                            <form name='add_expense' method='POST' class="collapsible2 move-right">
+                                <div>
+                                    <table>
+                                        <tr class="spaceUnder">
+                                            <td>Category</td>
+                                            <td>
+                                                <select width=1250 name='tr_ctg' id='i_sub_assoc_pr_ctg'>
+                                                    {% for ctg in expense_categories %}
+                                                        <option value="{{ ctg['ctg_id'] }}">{{ctg['ctg_desc']}}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </td>
+                                        </tr>
+
+                                        <tr class="spaceUnder">
+                                            <td>Subcategory</td>
+                                            <td>
+                                                <select width=1250 name='tr_subctg' id='i_sub_subctg'>
+                                                </select>
+                                            </td>
+                                        </tr>
+
+                                        <tr class="spaceUnder">
+                                            <td><label for='item_name'>Item</label> </td>
+                                            <td>
+                                                <select width=1250 name='tr_item' id='item_name'></select> 
+                                            </td>
+                                        </tr>
+
+                                        <tr class="spaceUnder">
+                                            <td><label for='tr_item_value'>Value</label> </td>
+                                            <td>
+                                                <input type='number' step='0.01' min=0 name='tr_item_value' id='tr_item_value' placeholder='Amount '
+                                                    value="{{ request.form['tr_item_value']}}" width=20>
+                                                </input>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <p></p>
+
+                                    
+                                    <a href='#' class="btn btn-info btn-sm" id='add_to_list'>Add to List</a> 
+                                    <button class="btn btn-info btn-sm">Add new</button>
+
+                                    <p></p>
+                                    <table>
+                                        <tr class="spaceUnder">
+                                            <td><label for='tr_total_value'>Total</label></td>
+                                            <td>
+                                            <input type='number' name='tr_total_value' id='tr_total_value' placeholder='Amount'
+                                                value="{{ request.form['tr_total_value']}}" disabled>
+                                            </input>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><label for='assoc_acc'>Account</label></td>
+                                            <td>
+                                                <select width=1250 name='tr_assoc_acc'>
+                                                    {% for acc in accounts %}
+                                                        <option value="{{ acc['acc_name'] }}">{{acc['acc_name']}}</option>
+                                                    {% endfor %}
+                                                </select> 
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><label for='tr_date'>Date</label></td>
+                                            <td><input type="date" id="start" name="tr_date"></td>
+                                        </tr>
+                                            <td><label for='tr_descr'>Description</label></td>
+                                            <td>
+                                                <input type='text' name='tr_descr' placeholder='Comment' width=100%
+                                                    value="{{ request.form['tr_descr']}}">
+                                                </input>
+                                            </td>
+                                    </table>
+                                </div>
+                            
+                                <p></p>
+                                <div class='form-group align-self-center'>
+                                    <button type='submit' class='btn btn-primary' name='confirm_exp_trans'>Confirm</button>
+                                </div>
+                            </form> 
+                        </div>
+        
+                        <div class='col-lg-6'>
+                            <table id='pending_items' width= 50% border= 2>
+                                <thead>
+                                    <tr>
+                                        <th width=25%>Item</th>
+                                        <th width=10%>Value</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>    
+                        </div>
+                    </div>
+                    <div class='row'>  
+                    </div>
+                </div>
+ 
+            </div> 
+        </div>
+
+        <br>
+        <div>
+            <h4 class='income-header'>Add income</h4>
+
+                <form name='add_income' method='POST' class="collapsible2 collapsible-income move-right">
+                    <div>
+                               
+                        <table>
+                            <tr class="spaceUnder">
+                                <td><label for='assoc_acc'>Account</label>  </td>
+                                <td>
+                                    <select width=1250 name='assoc_acc'>
+                                        {% for acc in accounts %}
+                                            <option value="{{ acc['acc_id'] }}">{{acc['acc_name']}}</option>
+                                        {% endfor %}
+                                    </select> 
+                                </td>
+                            </tr>
+
+                            <tr class="spaceUnder">
+                                <td><label for='income_subcat'>Source</label></td>
+                                <td>
+                                    <select width=1250 name='income_subcat' id='income_subcat'>
+                                        {% for sctg in income_subcategories %}
+                                            <option value="{{ sctg['subctg_id'] }}">{{sctg['subctg_desc']}}</option>
+                                        {% endfor %}
+                                    </select> 
+                                    <button class="btn btn-info btn-sm">Add new</button>
+                                </td>
+                            </tr>
+
+                            <tr class="spaceUnder">
+                                <td><label for='income_item'>Reason</label></td>
+                                <td>
+                                    <select width=1250 name='income_item' id='income_item'></select> 
+                                    <button class="btn btn-info btn-sm">Add new</button>
+                                </td>
+                            </tr>
+
+                            <tr class="spaceUnder">
+                                <td><label for='income_amount'>Amount</label> </td>
+                                <td>
+                                    <input type='number' name='income_amount' placeholder='Income Amount'
+                                        value="{{ request.form['income_amount']}}">
+                                    </input>
+                                </td>
+                            </tr>
+
+                            <tr class="spaceUnder">
+                                <td><label for='tr_date'>Date       </label></td>
+                                <td>
+                                    <input type="date" id="start" name="tr_date" value="{{ request.form['tr_date']}}"> 
+                                </td>
+                            </tr>
+
+                            <tr class="spaceUnder">
+                                <td><label for='income_comment'>Description       </label></td>
+                                <td>
+                                    <input type="text" id="income_comment" name="income_comment" value="{{ request.form['income_comment']}}">
+                                </td>
+                            </tr>
+                        </table>
+
+                    </div>
+                
+                    <p></p>
+                    <div class='form-group'>
+                        <button type='submit' class='btn btn-primary' name='confirm_inc_trans'>Confirm</button>
+                    </div>
+                </form> 
+                <br>
+        </div>
+    </div>
+
+    <br>
+
+{% endblock %}
+{% block scripts %}
+<script src="{{url_for('static', filename='/js/get_subcategories.js')}}"></script>
+<script src="{{url_for('static', filename='/js/get_items.js')}}"></script>
+<script src="{{url_for('static', filename='/js/get_income_items.js')}}"></script>
+<script src="{{url_for('static', filename='/js/add_item_to_list.js')}}"></script>
+{% endblock %}

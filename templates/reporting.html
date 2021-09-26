@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2 class = 'headline-center'>{% block title %} My money Reporting ! {% endblock %}</h2> 
+    
+    <div class='container-fluid'></div>
+
+        <div class='row'>  
+            <div class='col'>
+                <h4>Montly Totals</h4>
+                <table>
+                    <thead >
+                        <tr class="spaceUnder" border=1>
+                            <td>Month</td>
+                            <td class='expense-total'>Expenses</td>
+                            <td class='income-total'>Income</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for month_expense in all_monthly_totals%}
+                            <tr class="spaceUnder">
+                                <td><i>{{ month_expense['month'] }}</i></td>
+                                <td class='expense-total'>{{ month_expense['Expenses'] }}</td>
+                                <td class='income-total'>{{ month_expense['Income'] }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+ 
+            <div class='col'>
+                <h4>Expenses to date</h4>
+                <table>
+
+                    <tbody border=2>
+                        <tr class="spaceUnder">
+                            <td><b>Monthly</b></td>    
+                            <td class='expense-total'>{{ monthly_expenses }} Euro</td>
+                        </tr>
+                        <tr class="spaceUnder">
+                            <td><b>Yearly</b></td>    
+                            <td class='expense-total'>{{ yearly_expenses }} Euro</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+    <br>
+
+
+    <h4>Last Tansactions</h4>
+  
+    <br>
+    <div class='col-lg-12' id='collapsible_trans'>
+        <table id='last_transactions' width= 100% border= 2>
+            <thead>
+                <tr>
+                    <th width=25%>Trans ID</th>
+                    <th width=10%>Trans Descr</th>
+                    <th width=10%>Type</th>
+                    <th width=10%>Amount</th>
+                    <th width=10%>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>    
+    </div>
+    </div>
+
+
+{% endblock %}
+{% block scripts %}
+<script src="{{url_for('static', filename='/js/show_last_trans.js')}}"></script>
+{% endblock %}

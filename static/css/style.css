@@ -1,0 +1,95 @@
+.h1 {
+    border: px #eee solid;
+    color: red;
+    text-align: center;
+    padding: 10px;
+}
+
+.move-right {
+
+    width: 9%;
+    border: 2px solid rgba(255, 0, 0, 0.295);
+    float: right;
+}
+
+.collapsible2 {
+  cursor: pointer;
+  padding: 2.5%;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  float: left;
+}
+
+.item_table {
+  padding: 2.5%;
+  width: 50%;
+  border: 2;
+}
+
+.income-header {
+    color: rgb(136, 185, 43);
+}
+
+.expense-header {
+    color: rgb(209, 115, 115);
+}
+.income-total {
+  color: rgb(110, 151, 33);
+  font-weight: bold;
+  text-align: right;
+  font-size: 15px;
+}
+
+.expense-total {
+  color: rgb(194, 84, 84);
+  font-weight: bold;
+  text-align: right;
+  font-size: 15px;
+}
+
+tr.spaceUnder>td {
+  padding-bottom: 1ch;
+  padding-right: 1ch;
+}
+
+.red-color {
+  background-color: rgb(252, 232, 232);
+}
+
+.collapsible-income{
+  background-color: rgb(227, 248, 215);
+}
+
+.collapsible {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.collapsible:hover {
+  background-color: #ccc;
+}
+
+/* Style the collapsible content. Note: hidden by default */
+.content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #f1f1f1;
+}
+
+.headline-center {
+  text-align: center;
+  color: rgb(134, 119, 119);
+
+}

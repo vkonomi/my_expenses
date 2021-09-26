@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class = 'headline-center'>{% block title %} My money Admin page ! {% endblock %}</h1> <!-- works both as a title for the page and a heading that appears below the navigation bar inherited from the base template. -->
+
+<form name='create_category' method='POST'>
+    <div class='form-group'>
+        <label for='addcategory1'>Add product category</label>
+        <input type='text' name='addcategory2' placeholder='Category Desc' class='form-control'
+            value="{{ request.form['addcategory2']}}">
+        </input>
+        <br>
+        <input type='radio' name='addcategory3'  id='Expense'
+            value="E">
+        </input>
+        <label for='Expense'>Expense</label>
+        <input type='radio' name='addcategory3'  id='Income'
+            value="I">
+        </input>
+        <label for='Income'>Income</label>
+    </div>
+    <div class='form-group'>
+        <button type='submit' class='btn btn-primary' name='create_category'>Add category</button>
+    </div>
+</form>     
+<hr size="8" width="100%" color="red">  
+
+<form name='create_subcategory' method='POST'>
+    <div class='form-group'>
+        <label for='addsubcategory1'>Add subproduct category</label>
+        <input type='text' name='addsubcategory2' placeholder='Subcategory desc' class='form-control'
+            value="{{ request.form['subcategory']}}">
+        </input>
+        <p></p>
+        <p>
+            For the following category
+        </p>
+        <select width=1250 name='assoc_pr_ctg'>
+            {% for cat in categories %}
+                <option value="{{ cat['ctg_id'] }}">{{cat['ctg_desc']}}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class='form-group'>
+        <button type='submit' class='btn btn-primary' name='create_subcategory'>Add subcategory</button>
+    </div>
+</form>     
+
+<hr size="8" width="100%" color="red">  
+<form name='create_item' method='POST'>
+    <div class='form-group'>
+        <label for='additem1'>Add Item</label>
+        <input type='text' name='additem1' placeholder='Item desc' class='form-control'
+            value="{{ request.form['item']}}">
+        </input>
+        <p></p>
+        <table>
+            <tr>
+                <th>Category</th>
+                <th>Subcategory</th>
+            </tr>
+            <tr>
+                <td>
+                    <select width=1250 name='i_sub_assoc_pr_ctg' id='i_sub_assoc_pr_ctg'>
+                        {% for cat in categories %}
+                            <option value="{{ cat['ctg_id'] }}">{{cat['ctg_desc']}}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+                <td>
+                    <select width=1250 name='i_sub_subctg' id='i_sub_subctg'>
+                    </select>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class='form-group'>
+        <button type='submit' class='btn btn-primary' name='create_item'>Add item</button>
+    </div>
+</form>  
+
+<p id=demo></p>
+        
+
+{% endblock %}
+{% block scripts %}
+<script src="{{url_for('static', filename='/js/get_subcategories.js')}}"></script>
+{% endblock %}

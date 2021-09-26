@@ -1,0 +1,14 @@
+//TODO
+
+--------Normalise tables
+Create expense transactions
+Multiple items in transactions
+    Add item to table (temp sql table?)
+    Show table of items
+    Add all items to tr_details
+Show last (10/100) transactions
+Pressing on a transaction opens/leads to tr details
+Generate Reports
+    Create parameter-based sql queries
+    Filter buttons
+    Connect to ajax to show dynamic queries
